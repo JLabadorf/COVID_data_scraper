@@ -3,7 +3,8 @@ import pandas as pd
 from flask_heroku import Heroku
 
 
-app = Flask(__name__,template_folder='.')
+app = Flask(__name__)
+heroku = Heroku(app)
 
 oh_url = r'https://coronavirus.ohio.gov/static/COVIDSummaryData.csv'
 
