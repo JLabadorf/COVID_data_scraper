@@ -68,3 +68,7 @@ def age_group():
     df = pd.read_csv(oh_url).set_index(['Age Range']).groupby(['Age Range']).sum()
     d = df.to_dict()
     return jsonify(d)
+
+
+if __name__ =='__main__':
+    app.run()
