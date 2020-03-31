@@ -102,7 +102,7 @@ def age_group():
     df_county['Case Count'] = df_county['Case Count'].str.replace(',','').astype(int)
     #df_county['Death Count'] = df_county['Death Count'].str.replace(',','')#.astype(int)
     #df_county['Hospitalized Count'] = df_county['Hospitalized Count']#.str.replace(',','').astype(int)
-    df_county = df_county.set_index(['Age Range']).groupby(['Age Range'])
+    df_county = df_county.set_index(['Age Range']).groupby(['Age Range']).sum()
     d = df_county.to_dict()
     return jsonify(d)
 if __name__ =='__main__':
