@@ -11,13 +11,26 @@ heroku = Heroku(app)
 def index():
     return render_template('index.html')
 
+@app.route('/sum/')
+def summuraized():
+    oh_url = r'https://coronavirus.ohio.gov/static/COVIDSummaryData.csv'
+    df = pd.read_csv(oh_url)
+
+    df_county = df[['County','Case Count','Death Count','Hospitalized Count']]
+    df_county['Case Count'] = df_county['Case Count'].str.replace(',','').astype(int)
+    #df_county['Death Count'] = df_county['Death Count'].str.replace(',','').astype(int)
+    df_county['Hospitalized Count'] = df_county['Hospitalized Count'].str.replace(',','').astype(int)
+    df_county = df_county.set_index(['County']).sum()
+
+    d = df_county.to_dict()
+    return jsonify(d)
+
 
 @app.route('/all/') # This pulls all the data from the ODH
 def all_data():
     oh_url = r'https://coronavirus.ohio.gov/static/COVIDSummaryData.csv'
     df = pd.read_csv(oh_url)
     d  = df.to_dict()
-    print(df.head(10))
     return jsonify(d)
 
 @app.route('/county/')
@@ -27,9 +40,8 @@ def county_data():
     df_county = df[['County','Case Count','Death Count','Hospitalized Count']]
     df_county['Case Count'] = df_county['Case Count'].str.replace(',','').astype(int)
     #df_county['Death Count'] = df_county['Death Count'].str.replace(',','').astype(int)
-    #df_county['Hospitalized Count'] = df_county['Hospitalized Count'].str.replace(',','').astype(int)
+    df_county['Hospitalized Count'] = df_county['Hospitalized Count'].str.replace(',','').astype(int)
     df_county = df_county.set_index(['County']).groupby(['County']).sum()
-    print(df_county.head(10))
 
     d = df_county.to_dict()
     return jsonify(d)
