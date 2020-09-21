@@ -17,9 +17,9 @@ def summuraized():
     df = pd.read_csv(oh_url,low_memory=False)
 
     df_county = df[['County','Case Count','Death Due to Illness Count','Hospitalized Count']]
-    df_county['Case Count'] = df_county['Case Count'].str.replace(',','').astype(float)
-    df_county['Death Due to Illness Count'] = df_county['Death Due to Illness Count'].str.replace(',','').astype(float)
-    df_county['Hospitalized Count'] = df_county['Hospitalized Count'].str.replace(',','').astype(float)
+    df_county['Case Count'] = df_county['Case Count'].str.replace(',','').astype(int)
+    df_county['Death Due to Illness Count'] = df_county['Death Due to Illness Count'].str.replace(',','').astype(int)
+    df_county['Hospitalized Count'] = df_county['Hospitalized Count'].str.replace(',','').astype(int)
     df_county = df_county.set_index(['County']).sum()
 
     d = df_county.to_dict()
@@ -42,9 +42,9 @@ def county_data():
         df_county = df[['County','Case Count','Death Due to Illness Count','Hospitalized Count','Onset Date']]
     else:
         df_county = df[['County','Case Count','Death Due to Illness Count','Hospitalized Count']]
-    df_county['Case Count'] = df_county['Case Count'].str.replace(',','').astype(float)
-    df_county['Death Due to Illness Count'] = df_county['Death Due to Illness Count'].str.replace(',','').astype(float)
-    df_county['Hospitalized Count'] = df_county['Hospitalized Count'].str.replace(',','').astype(float)
+    df_county['Case Count'] = df_county['Case Count'].str.replace(',','').astype(int)
+    df_county['Death Due to Illness Count'] = df_county['Death Due to Illness Count'].str.replace(',','').astype(int)
+    df_county['Hospitalized Count'] = df_county['Hospitalized Count'].str.replace(',','').astype(int)
     if param =="d":
         d={}
         df_county = df_county.set_index(['Onset Date']).groupby(['County','Onset Date']).sum()
@@ -87,9 +87,9 @@ def county_lookup(county):
     oh_url = r'https://coronavirus.ohio.gov/static/COVIDSummaryData.csv'
     df = pd.read_csv(oh_url,low_memory=False)
     df_county = df[['County','Case Count','Death Due to Illness Count','Hospitalized Count']]
-    df_county['Case Count'] = df_county['Case Count'].str.replace(',','').astype(float)
-    #df_county['Death Due to Illness Count'] = df_county['Death Due to Illness Count']#.str.replace(',','').astype(float)
-    #df_county['Hospitalized Count'] = df_county['Hospitalized Count']#.str.replace(',','').astype(float)
+    df_county['Case Count'] = df_county['Case Count'].str.replace(',','').astype(int)
+    #df_county['Death Due to Illness Count'] = df_county['Death Due to Illness Count']#.str.replace(',','').astype(int)
+    #df_county['Hospitalized Count'] = df_county['Hospitalized Count']#.str.replace(',','').astype(int)
     df_county = df_county.set_index(['County']).groupby(['County']).sum()
     d = df_county.loc[county].to_dict()
     return jsonify(d)
@@ -99,9 +99,9 @@ def sex():
     oh_url = r'https://coronavirus.ohio.gov/static/COVIDSummaryData.csv'
     df = pd.read_csv(oh_url,low_memory=False)
     df_county = df[['Sex','Case Count','Death Due to Illness Count','Hospitalized Count']]
-    df_county['Case Count'] = df_county['Case Count'].str.replace(',','').astype(float)
-   # df_county['Death Due to Illness Count'] = df_county['Death Due to Illness Count']#.str.replace(',','').astype(float)
-   # df_county['Hospitalized Count'] = df_county['Hospitalized Count']#.str.replace(',','').astype(float)
+    df_county['Case Count'] = df_county['Case Count'].str.replace(',','').astype(int)
+   # df_county['Death Due to Illness Count'] = df_county['Death Due to Illness Count']#.str.replace(',','').astype(int)
+   # df_county['Hospitalized Count'] = df_county['Hospitalized Count']#.str.replace(',','').astype(int)
     df_county = df_county.set_index(['Sex']).groupby(['County']).sum()
     d = df_county.to_dict()
     return jsonify(d)
@@ -111,9 +111,9 @@ def onset_date():
     oh_url = r'https://coronavirus.ohio.gov/static/COVIDSummaryData.csv'
     df = pd.read_csv(oh_url,low_memory=False)
     df_county = df[['Onset Date','Case Count','Death Due to Illness Count','Hospitalized Count']]
-    df_county['Case Count'] = df_county['Case Count'].str.replace(',','').astype(float)
-    #df_county['Death Due to Illness Count'] = df_county['Death Due to Illness Count']#.str.replace(',','').astype(float)
-    #df_county['Hospitalized Count'] = df_county['Hospitalized Count']#.str.replace(',','').astype(float)
+    df_county['Case Count'] = df_county['Case Count'].str.replace(',','').astype(int)
+    #df_county['Death Due to Illness Count'] = df_county['Death Due to Illness Count']#.str.replace(',','').astype(int)
+    #df_county['Hospitalized Count'] = df_county['Hospitalized Count']#.str.replace(',','').astype(int)
     df_county = df_county.set_index(['Onset Date']).groupby(['Onset Date']).sum()
     d = df_county.to_dict()
     return jsonify(d)
@@ -123,9 +123,9 @@ def onset_date_county(county):
     oh_url = r'https://coronavirus.ohio.gov/static/COVIDSummaryData.csv'
     df = pd.read_csv(oh_url,low_memory=False)
     df_county = df[['County','Onset Date','Case Count','Death Due to Illness Count','Hospitalized Count']]
-    df_county['Case Count'] = df_county['Case Count'].str.replace(',','').astype(float)
-    #df_county['Death Due to Illness Count'] = df_county['Death Due to Illness Count']#.str.replace(',','').astype(float)
-    #df_county['Hospitalized Count'] = df_county['Hospitalized Count']#.str.replace(',','').astype(float)
+    df_county['Case Count'] = df_county['Case Count'].str.replace(',','').astype(int)
+    #df_county['Death Due to Illness Count'] = df_county['Death Due to Illness Count']#.str.replace(',','').astype(int)
+    #df_county['Hospitalized Count'] = df_county['Hospitalized Count']#.str.replace(',','').astype(int)
     df_county = df_county.set_index(['County','Onset Date']).groupby(['County','Onset Date']).sum()
     d = df_county.loc[county].to_dict()
     return jsonify(d)
@@ -135,9 +135,9 @@ def death_count():
     oh_url = r'https://coronavirus.ohio.gov/static/COVIDSummaryData.csv'
     df = pd.read_csv(oh_url,low_memory=False)
     df_county = df[['Date Of Death','Case Count','Death Due to Illness Count','Hospitalized Count']]
-    df_county['Case Count'] = df_county['Case Count'].str.replace(',','').astype(float)
-    #df_county['Death Due to Illness Count'] = df_county['Death Due to Illness Count']#.str.replace(',','').astype(float)
-    #df_county['Hospitalized Count'] = df_county['Hospitalized Count']#.str.replace(',','').astype(float)
+    df_county['Case Count'] = df_county['Case Count'].str.replace(',','').astype(int)
+    #df_county['Death Due to Illness Count'] = df_county['Death Due to Illness Count']#.str.replace(',','').astype(int)
+    #df_county['Hospitalized Count'] = df_county['Hospitalized Count']#.str.replace(',','').astype(int)
     df_county = df_county.set_index(['Date Of Death']).groupby(['Date Of Death']).sum()
     d = df_county.to_dict()
     return jsonify(d)
@@ -147,9 +147,9 @@ def age_group():
     oh_url = r'https://coronavirus.ohio.gov/static/COVIDSummaryData.csv'
     df = pd.read_csv(oh_url,low_memory=False)
     df_county = df[['Age Range','Case Count','Death Due to Illness Count','Hospitalized Count']]
-    df_county['Case Count'] = df_county['Case Count'].str.replace(',','').astype(float)
-    #df_county['Death Due to Illness Count'] = df_county['Death Due to Illness Count'].str.replace(',','')#.astype(float)
-    #df_county['Hospitalized Count'] = df_county['Hospitalized Count']#.str.replace(',','').astype(float)
+    df_county['Case Count'] = df_county['Case Count'].str.replace(',','').astype(int)
+    #df_county['Death Due to Illness Count'] = df_county['Death Due to Illness Count'].str.replace(',','')#.astype(int)
+    #df_county['Hospitalized Count'] = df_county['Hospitalized Count']#.str.replace(',','').astype(int)
     df_county = df_county.set_index(['Age Range']).groupby(['Age Range']).sum()
     d = df_county.to_dict()
     return jsonify(d)
