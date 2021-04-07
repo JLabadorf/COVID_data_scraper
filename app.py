@@ -14,7 +14,7 @@ def index():
 
 @app.route('/sum/')
 def summuraized():
-    oh_url = r'https://coronavirus.ohio.gov/static/COVIDSummaryData.csv'
+    oh_url = r'https://coronavirus.ohio.gov/static/dashboards/COVIDDeathData_CountyOfResidence.csv'
     df = pd.read_csv(oh_url,low_memory=False)
 
     df_county = df[['County','Case Count','Death Due to Illness Count','Hospitalized Count']]
@@ -29,7 +29,7 @@ def summuraized():
 
 @app.route('/all/') # This pulls all the data from the ODH
 def all_data():
-    oh_url = r'https://coronavirus.ohio.gov/static/COVIDSummaryData.csv'
+    oh_url = r'https://coronavirus.ohio.gov/static/dashboards/COVIDDeathData_CountyOfResidence.csv'
     df = pd.read_csv(oh_url,low_memory=False)
     d  = df.to_dict()
     return jsonify(d)
@@ -37,7 +37,7 @@ def all_data():
 @app.route('/county/')
 def county_data():
     param = request.args.get("g")
-    oh_url = r'https://coronavirus.ohio.gov/static/COVIDSummaryData.csv'
+    oh_url = r'https://coronavirus.ohio.gov/static/dashboards/COVIDDeathData_CountyOfResidence.csv'
     df = pd.read_csv(oh_url,low_memory=False)
     if param=="d":
         df_county = df[['County','Case Count','Death Due to Illness Count','Hospitalized Count','Onset Date']]
@@ -85,7 +85,7 @@ def county_data():
     
 @app.route('/county/<county>/')
 def county_lookup(county):
-    oh_url = r'https://coronavirus.ohio.gov/static/COVIDSummaryData.csv'
+    oh_url = r'https://coronavirus.ohio.gov/static/dashboards/COVIDDeathData_CountyOfResidence.csv'
     df = pd.read_csv(oh_url,low_memory=False)
     df_county = df[['County','Case Count','Death Due to Illness Count','Hospitalized Count']]
     df_county['Case Count'] = df_county['Case Count'].str.replace(',','').astype(int)
@@ -97,7 +97,7 @@ def county_lookup(county):
 
 @app.route('/sex/')
 def sex():
-    oh_url = r'https://coronavirus.ohio.gov/static/COVIDSummaryData.csv'
+    oh_url = r'https://coronavirus.ohio.gov/static/dashboards/COVIDDeathData_CountyOfResidence.csv'
     df = pd.read_csv(oh_url,low_memory=False)
     df_county = df[['Sex','Case Count','Death Due to Illness Count','Hospitalized Count']]
     df_county['Case Count'] = df_county['Case Count'].str.replace(',','').astype(int)
@@ -109,7 +109,7 @@ def sex():
 
 @app.route('/onset/date/')
 def onset_date():
-    oh_url = r'https://coronavirus.ohio.gov/static/COVIDSummaryData.csv'
+    oh_url = r'https://coronavirus.ohio.gov/static/dashboards/COVIDDeathData_CountyOfResidence.csv'
     df = pd.read_csv(oh_url,low_memory=False)
     df_county = df[['Onset Date','Case Count','Death Due to Illness Count','Hospitalized Count']]
     df_county['Case Count'] = df_county['Case Count'].str.replace(',','').astype(int)
@@ -121,7 +121,7 @@ def onset_date():
 
 @app.route('/onset/date/<county>/')
 def onset_date_county(county):
-    oh_url = r'https://coronavirus.ohio.gov/static/COVIDSummaryData.csv'
+    oh_url = r'https://coronavirus.ohio.gov/static/dashboards/COVIDDeathData_CountyOfResidence.csv'
     df = pd.read_csv(oh_url,low_memory=False)
     df_county = df[['County','Onset Date','Case Count','Death Due to Illness Count','Hospitalized Count']]
     df_county['Case Count'] = df_county['Case Count'].str.replace(',','').astype(int)
@@ -133,7 +133,7 @@ def onset_date_county(county):
 
 @app.route('/death/')
 def death_count():
-    oh_url = r'https://coronavirus.ohio.gov/static/COVIDSummaryData.csv'
+    oh_url = r'https://coronavirus.ohio.gov/static/dashboards/COVIDDeathData_CountyOfResidence.csv'
     df = pd.read_csv(oh_url,low_memory=False)
     df_county = df[['Date Of Death','Case Count','Death Due to Illness Count','Hospitalized Count']]
     df_county['Case Count'] = df_county['Case Count'].str.replace(',','').astype(int)
@@ -145,7 +145,7 @@ def death_count():
 
 @app.route('/age/')
 def age_group():
-    oh_url = r'https://coronavirus.ohio.gov/static/COVIDSummaryData.csv'
+    oh_url = r'https://coronavirus.ohio.gov/static/dashboards/COVIDDeathData_CountyOfResidence.csv'
     df = pd.read_csv(oh_url,low_memory=False)
     df_county = df[['Age Range','Case Count','Death Due to Illness Count','Hospitalized Count']]
     df_county['Case Count'] = df_county['Case Count'].str.replace(',','').astype(int)
