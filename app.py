@@ -3,6 +3,7 @@ import pandas as pd
 
 from flask_heroku import Heroku
 
+#Code by James Labadorf. James@jameslabadorf.com
 app = Flask(__name__)
 
 heroku = Heroku(app)
